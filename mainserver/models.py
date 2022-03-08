@@ -38,7 +38,7 @@ class dispatch_name_1(models.Model):
     employee_number = models.CharField(max_length=4)
     email_address = models.EmailField(max_length=254)
     def __str__(self):
-        return self.employee_number 
+        return self.name 
 
 class Srlistofdispatcher(models.Model):
     action_choice = [
