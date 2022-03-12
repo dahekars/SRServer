@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block body %}
-
-<h2> Sr form page</h2><br>
-
+<div>
+<h2> Sr form page</h2>
+</div>
 {%csrf_token %}
-
+<div><p>
 <form method="post" action="/srform/">
-{{form.as_p}}
-<button name="submit">next</button>
-</form>
+    {{form.as_p}}
+    <button name="submit">next</button>
+</form></p></div>
+
 {% endblock %}
