@@ -3,13 +3,14 @@
 {% block head %}
 
 {% endblock %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 <h1> Signup page </h1>
 
 <form method="post" action="/signup/" class = 'form-group'>
     {% csrf_token %}
-    {{form.as_p}}    
+    {{form|crispy}}    
     <Submit type="submit" class="btn btn-success">Submit</button>
 </form>
 {% endblock %}

@@ -3,17 +3,25 @@
 {% block head %}
 
 {% endblock %}
-
+{% load crispy_forms_tags %}
 {% block body %}
-<div>
-<h2> Sr form page</h2>
-</div>
+{% if user.is_authenticated%}
+    <div>
+    <h2> Sr form page</h2>
+    </div>
+    <b>
+        Username: {{user.username}}
+    </b>
+    <div>
+    <form method="post" action="/srform/">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button name="submit">Next</button>
+    </form></div>
 
-<div>
-<form method="post" action="/srform/">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button name="submit">Next</button>
-</form></div>
 
+{% else %}
+    <p>You are not logged in</p>
+    <p>Please <a href="/login"> login </a></p>
+{% endif %}
 {% endblock %}
