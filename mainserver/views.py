@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from .forms import SrForm
 from django.contrib.auth import login
 from django.contrib import messages
-from .models import Srlistofdispatcher
+from .models import Srlistofdispatcher, dispatch_name_1
 
 # Create your views here.
 def index(request):
@@ -14,8 +15,17 @@ def home(request):
 
 
 def srform_page(request):
+    if request.method == 'POST':
+        form = SrForm(request.POST)
+        if form.is_valid():
+            sr = form.cleaned_data['sr_number']
+            service_tag = form.cleaned_data['serivce_tag']
+            #dispatcher = form.cleaned_data['dispatch_name_of_sr']
+            action_taken = form.cleaned_data['action_taken']
 
-    return render(request, 'mainserver/srform.html', {'form': SrForm()})
-
-
-
+            add_process = Srlistofdispatcher(sr_number=sr, serivce_tag=service_tag, action_taken=action_taken, dispatch_name_of_sr= dispatch_name_1.objects.get(id = 1))
+            add_process.save()
+        return HttpResponseRedirect('/srform/')
+    else:
+        form = SrForm()
+    return render(request, 'mainserver/srform.html', {'form': form})

@@ -11,7 +11,7 @@ from .models import dispatch_name_1, Srlistofdispatcher
 
 @admin.register(dispatch_name_1)
 class dispatch_name_1Admin(admin.ModelAdmin):
-    list_display = ('name', 'employee_number', 'email_address')
+    list_display = ('id','name', 'employee_number', 'email_address')
     list_filter = ('name', 'employee_number', 'email_address')
     search_fields = ('name', 'employee_number', 'email_address')
 

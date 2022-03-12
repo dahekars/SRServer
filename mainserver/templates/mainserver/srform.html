@@ -8,11 +8,12 @@
 <div>
 <h2> Sr form page</h2>
 </div>
-{%csrf_token %}
-<div><p>
+
+<div>
 <form method="post" action="/srform/">
+    {% csrf_token %}
     {{form.as_p}}
-    <button name="submit">next</button>
-</form></p></div>
+    <button name="submit">Next</button>
+</form></div>
 
 {% endblock %}
