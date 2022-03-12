@@ -1,0 +1,17 @@
+{% extends 'mainserver/base.html' %}
+    
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<h2> Sr form page</h2><br>
+
+{%csrf_token %}
+
+<form method="post" action="/srform/">
+{{form.as_p}}
+<button name="submit">next</button>
+</form>
+{% endblock %}
