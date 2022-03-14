@@ -12,8 +12,17 @@ def index(request):
     return render(request, 'mainserver/base.html', {})
 
 def home(request):
-    all_data = Srlistofdispatcher.objects.all()
-    return render(request, 'mainserver/home.html', {'ls': all_data})
+    try:
+        user = request.user
+        user_name = dispatch_name_1.objects.get(name=user)
+        today = datetime.today() - timedelta(days=1)
+        all_sr_for_today = Srlistofdispatcher.objects.filter(dispatch_name_of_sr= user_name, date_created__gte=today)
+        return render(request, 'mainserver/home.html', {'ls': all_sr_for_today})
+    except Exception:
+        all_data = Srlistofdispatcher.objects.all()
+#        names_of_dispatchers = dispatch_name_1.objects.all()
+        return render(request, 'mainserver/home.html', {'ls': all_data})
+
 
     #testing
 #    if User.is_authenticated:
@@ -53,3 +62,35 @@ def srform_page(request):
     today = datetime.today() - timedelta(days=1)
     latest_5 =Srlistofdispatcher.objects.filter(dispatch_name_of_sr= user_name, date_created__gte=today) [:5]
     return render(request, 'mainserver/srform.html', {'form': form, 'latest_5': latest_5})
+
+def testpage(request):
+    try:
+        user = request.user
+        user_name = dispatch_name_1.objects.get(name=user)
+        today = datetime.today() - timedelta(days=1)
+        all_sr_for_today = Srlistofdispatcher.objects.filter(dispatch_name_of_sr= user_name, date_created__gte=today)
+
+        #count
+        names = dispatch_name_1.objects.all()
+        #count_all = Srlistofdispatcher.objects.filter(dispatch_name_of_sr= user_name).count()
+        print(names.name)
+        return render(request, 'mainserver/home.html', {'ls': all_sr_for_today})
+
+    except Exception:
+        all_data = Srlistofdispatcher.objects.all()
+        names_of_dispatchers = dispatch_name_1.objects.all()
+
+        count_all = Srlistofdispatcher.objects.all().count()
+
+        for name in names_of_dispatchers:
+            name_id = name.id
+            counts = Srlistofdispatcher.objects.filter(dispatch_name_of_sr= name_id).count()
+            print(f"{name}:{counts}") 
+        return render(request, 'mainserver/home.html', {'ls': all_data})
+
+#names_of_dispatchers = dispatch_name_1.objects.all()
+#
+#for name in names_of_dispatchers:
+#    name_id = name.id
+#    counts = Srlistofdispatcher.objects.filter(dispatch_name_of_sr= name_id).count()
+#    print(f"{name}:{counts}") 
