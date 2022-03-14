@@ -16,10 +16,33 @@
     <form method="post" action="/srform/">
         {% csrf_token %}
         {{form|crispy}}
-        <button name="submit">Next</button>
-    </form></div>
-
-
+        <button name="submit" class="btn btn-success">Next</button>
+    </form>
+</div>
+<br>
+<div>
+    <h3>All Sr List</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">SR</th>
+                <th scope="col">Service tag</th>
+                <th scope="col">Action</th>
+                <th scope="col">Dispacther name</th>
+                <th scope="col">Date /time </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sr in latest_5 %}
+            <tr>
+                <td scope="row">{{ sr.sr_number}}</td>
+                <td>{{sr.serivce_tag.upper }}</td>
+                <td>{{sr.action_taken}}</td>
+                <td>{{sr.dispatch_name_of_sr}}</td>
+                <td>{{sr.date_created}}</td>
+            </tr>
+            {% endfor %}
+</div>
 {% else %}
     <p>You are not logged in</p>
     <p>Please <a href="/login"> login </a></p>

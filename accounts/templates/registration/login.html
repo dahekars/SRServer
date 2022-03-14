@@ -8,12 +8,19 @@
     
     {% block body %}
     <h1> Login Page</h1>
-    
-    <form method="post" action="/login/" class = 'form-group'>
-        {% csrf_token %}
-        {{form|crispy}}
-        <p>Don't have accounts?</p>
-        <a href="/signup/">Signup</a>
-        <p><Submit type="submit" class="btn btn-success">Submit</button></p>
-    </form>
+        {% if user.is_authenticated %}
+        <div>
+            <h2> You are login as {{ user.username }}</h2>
+            <p>login as other users. Please <a href="/logout/">logout</a>.</p>
+        </div>
+        {% else %}
+        <form method="post" action="/login/">
+            {% csrf_token %}
+            {{form|crispy}}
+            <p>Don't have accounts?</p>
+            <a href="/signup/">Signup</a>
+            <p><button type="submit" class="btn btn-success">Submit</button></p>
+        </form>
+        
+        {% endif %}
     {% endblock %}
