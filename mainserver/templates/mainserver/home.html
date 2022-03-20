@@ -5,6 +5,33 @@
 {% endblock %}
 
 {% block body %}
+    {% if user.is_authenticated %}
+    <br><a href="/srform/"><button type="button" class="btn btn-success">New SR</button></a>
+    
+    <br><br><h3>All Sr List</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">SR</th>
+                <th scope="col">Service tag</th>
+                <th scope="col">Action</th>
+                <th scope="col">Dispacther name</th>
+                <th scope="col">Date /time </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sr in ls %}
+            <tr>
+                <td scope="row">{{ sr.sr_number}}</td>
+                <td>{{sr.serivce_tag.upper }}</td>
+                <td>{{sr.action_taken}}</td>
+                <td>{{sr.dispatch_name_of_sr}}</td>
+                <td>{{sr.date_created}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
     <h3>All Sr List</h3>
     <table class="table">
         <thead>
@@ -28,4 +55,5 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 {% endblock %}

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'mainserver.apps.MainserverConfig',
     'accounts.apps.AccountsConfig',
     'crispy_forms',
+    'rest_framework',
+    
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

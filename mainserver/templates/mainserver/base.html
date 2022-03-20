@@ -17,7 +17,6 @@
                     {% if user.is_authenticated %}
                         <i>{{user.username}}</i>
                         <a href="/logout/">Logout</a>
-                        <br><a href="/srform/"><button type="button" class="btn btn-success">New SR</button></a>
                     {% else %}
                         <a href="/signup/">Signup</a>
                         <a href="/login/">Login</a>
