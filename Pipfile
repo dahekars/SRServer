@@ -7,7 +7,7 @@ name = "pypi"
 django-crispy-forms = "==1.14.0"
 numpy = "==1.22.3"
 asgiref = "==3.5.0"
-sqlparse = "==0.4.2"
+sqlparse = "==0.4.4"
 Django = "==4.0.3"
 
 [dev-packages]
